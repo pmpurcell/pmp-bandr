@@ -23,7 +23,7 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
-        public Match GetMatch(int id)
+        public Match getMatch(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -95,6 +95,56 @@ namespace BandrBackEnd.DataAccess
                     int id = (int)cmd.ExecuteScalar();
 
                     match.Id = id;
+                }
+            }
+        }
+
+        public void updateMatch(Match match)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                      UPDATE Match
+                                      SET
+                                      swiperId = @swiperId
+                                      swiperMatch = @swiperMatch
+                                      recId = @recId
+                                      recMatch = recMatch
+                                      
+                                      WHERE Id = @id";
+
+
+                    cmd.Parameters.AddWithValue("@swiperId", match.swiperId);
+                    cmd.Parameters.AddWithValue("@swiperMatch", match.swiperMatch);
+                    cmd.Parameters.AddWithValue("@recId", match.recId);
+                    cmd.Parameters.AddWithValue("@recMatch", match.recMatch);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void deleteMatch(int id)
+        {
+            using(SqlConnection conn = Connection)
+            {
+                Connection.Open();
+
+                using (SqlCommand cmd = Connection.CreateCommand())
+                {
+
+                    cmd.CommandText = @"
+                                      DELETE FROM Match
+                                      WHERE ID = @id
+                                      ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
