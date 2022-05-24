@@ -18,7 +18,7 @@ namespace BandrBackEnd.DataAccess
         {
             get { 
                 
-                return new SqlConnection(_config.GetConnectionString("Default"));
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             
             }
         }
@@ -40,10 +40,9 @@ namespace BandrBackEnd.DataAccess
                                         userAge,
                                         userBio,
                                         location,
-                                        skillLevel,
-
+                                        skillLevel
                                         FROM
-                                        User WHERE firebaseUid = @firebaseUid
+                                        [User] WHERE firebaseUid = @firebaseUid
                                         ";
 
                     cmd.Parameters.AddWithValue("@firebaseUid", firebaseUid);

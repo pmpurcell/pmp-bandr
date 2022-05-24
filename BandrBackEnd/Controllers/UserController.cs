@@ -16,7 +16,7 @@ namespace BandrBackEnd.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("id")]
+        [HttpGet]
         public ActionResult getSingleUser(int id)
         {
             User user = _userRepository.getSingleUser(id);
