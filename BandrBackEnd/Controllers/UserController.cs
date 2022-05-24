@@ -17,9 +17,9 @@ namespace BandrBackEnd.Controllers
         }
 
         [HttpGet]
-        public ActionResult getSingleUser(int id)
+        public ActionResult getSingleUser(int Id)
         {
-            User user = _userRepository.getSingleUser(id);
+            User user = _userRepository.getSingleUser(Id);
             if (user == null)
             {
                 return NotFound();
@@ -44,21 +44,23 @@ namespace BandrBackEnd.Controllers
             }
         }
 
-        [HttpPatch("user/id")]
+        [HttpPatch("{id}")]
         public ActionResult updateUser(int id, User updateUser)
         {
-            try
-            {
+            User user = _userRepository.getSingleUser(id);
+
+            if (user != null)
+            { 
                 _userRepository.updateUser(updateUser);
                 return Ok(updateUser);
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(updateUser);
+                return BadRequest(user);
             }
         }
 
-        [HttpDelete("user/id")]
+        [HttpDelete("{id}")]
         public ActionResult DeleteUser(int id)
         {
             try
