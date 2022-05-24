@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IMatchRepository, MatchRepository>();
+builder.Services.AddTransient<IMessageRepository, MessageRepository>();
 
 var app = builder.Build();
 
