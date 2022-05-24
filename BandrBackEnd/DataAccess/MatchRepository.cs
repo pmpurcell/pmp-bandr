@@ -34,16 +34,16 @@ namespace BandrBackEnd.DataAccess
                     cmd.CommandText = @"
                                        SELECT
                                        Id,
-                                       swiperId,
-                                       swiperMatch,
-                                       recId
-                                       recMatch
+                                       SwiperId,
+                                       SwiperMatch,
+                                       RecId,
+                                       RecMatch
                                        
                                        FROM
-                                       Match WHERE Id = @id
+                                       [Match] WHERE Id = @id
                                        ";
 
-                    cmd.Parameters.AddWithValue("id", id);
+                    cmd.Parameters.AddWithValue("Id", id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -78,11 +78,11 @@ namespace BandrBackEnd.DataAccess
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        INSERT INTO Match
-                                        swiperId,
-                                        swiperMatch,
-                                        recId,
-                                        recMatch
+                                        INSERT INTO [Match]
+                                        (SwiperId,
+                                        SwiperMatch,
+                                        RecId,
+                                        RecMatch)
                                         
                                         OUTPUT Inserted.Id
                                         VALUES (@swiperId, @swiperMatch, @recId, @recMatch)";
@@ -108,12 +108,12 @@ namespace BandrBackEnd.DataAccess
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                      UPDATE Match
+                                      UPDATE [Match]
                                       SET
-                                      swiperId = @swiperId
-                                      swiperMatch = @swiperMatch
-                                      recId = @recId
-                                      recMatch = recMatch
+                                      SwiperId = @swiperId,
+                                      SwiperMatch = @swiperMatch,
+                                      RecId = @recId,
+                                      RecMatch = recMatch
                                       
                                       WHERE Id = @id";
 
@@ -122,6 +122,7 @@ namespace BandrBackEnd.DataAccess
                     cmd.Parameters.AddWithValue("@swiperMatch", match.swiperMatch);
                     cmd.Parameters.AddWithValue("@recId", match.recId);
                     cmd.Parameters.AddWithValue("@recMatch", match.recMatch);
+                    cmd.Parameters.AddWithValue("@id", match.Id);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -132,14 +133,14 @@ namespace BandrBackEnd.DataAccess
         {
             using(SqlConnection conn = Connection)
             {
-                Connection.Open();
+                conn.Open();
 
-                using (SqlCommand cmd = Connection.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
 
                     cmd.CommandText = @"
-                                      DELETE FROM Match
-                                      WHERE ID = @id
+                                      DELETE FROM [Match]
+                                      WHERE Id = @id
                                       ";
 
                     cmd.Parameters.AddWithValue("@id", id);
