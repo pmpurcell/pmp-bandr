@@ -5,7 +5,7 @@ using BandrBackEnd.Models;
 
 namespace BandrBackEnd.Controllers
 {
-    [Route("api/[controller")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MatchController : Controller
     {

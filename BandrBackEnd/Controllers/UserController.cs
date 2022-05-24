@@ -5,7 +5,7 @@ using BandrBackEnd.Models;
 
 namespace BandrBackEnd.Controllers
 {
-    [Route("api/[controller")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -16,7 +16,7 @@ namespace BandrBackEnd.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet]
+        [HttpGet("id")]
         public ActionResult getSingleUser(int id)
         {
             User user = _userRepository.getSingleUser(id);
