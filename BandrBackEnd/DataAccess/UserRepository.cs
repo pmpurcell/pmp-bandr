@@ -18,12 +18,12 @@ namespace BandrBackEnd.DataAccess
         {
             get { 
                 
-                return new SqlConnection(_config.GetConnectionString("Default"));
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             
             }
         }
 
-        public User getSingleUser(int firebaseUid)
+        public User getSingleUser(int Id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -40,13 +40,12 @@ namespace BandrBackEnd.DataAccess
                                         userAge,
                                         userBio,
                                         location,
-                                        skillLevel,
-
+                                        skillLevel
                                         FROM
-                                        User WHERE firebaseUid = @firebaseUid
+                                        [User] WHERE Id = @Id
                                         ";
 
-                    cmd.Parameters.AddWithValue("@firebaseUid", firebaseUid);
+                    cmd.Parameters.AddWithValue("@Id", Id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -54,9 +53,8 @@ namespace BandrBackEnd.DataAccess
                     {
                         User user = new User
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("userId")),
-                            firebaseUid = reader.GetInt32(reader.GetOrdinal("firebaseUid")),
-                            photo = reader.GetString(reader.GetOrdinal("photos")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            photo = reader.GetString(reader.GetOrdinal("photo")),
                             userName = reader.GetString(reader.GetOrdinal("username")),
                             userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
                             userBio = reader.GetString(reader.GetOrdinal("userBio")),
@@ -83,16 +81,16 @@ namespace BandrBackEnd.DataAccess
                     using(SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
-                                        INSERT INTO User
-                                        photo,
-                                        userName,
-                                        userAge,
-                                        userBio,
-                                        location,
-                                        skillLevel,
+                                        INSERT INTO [User]
+                                        (Photo,
+                                        UserName,
+                                        UserAge,
+                                        UserBio,
+                                        Location,
+                                        SkillLevel)
 
                                         OUTPUT Inserted.Id
-                                        VALUES (@photo, @userName, @userBio, location, skillLevel)";
+                                        VALUES (@photo, @userName, @userAge, @userBio, @location, @skillLevel)";
 
                         cmd.Parameters.AddWithValue("@photo", user.photo);
                         cmd.Parameters.AddWithValue("@userName", user.userName);
@@ -118,14 +116,14 @@ namespace BandrBackEnd.DataAccess
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                      UPDATE User
+                                      UPDATE [User]
                                       SET
-                                      photo = @photo
-                                      userName = @userName
-                                      userAge = @userAge
-                                      userBio = @userBio
-                                      location = @location
-                                      skillLevel = @skillLevel
+                                      Photo = @photo,
+                                      UserName = @userName,
+                                      UserAge = @userAge,
+                                      UserBio = @userBio,
+                                      Location = @location,
+                                      SkillLevel = @skillLevel
 
                                       WHERE Id = @id";
 
@@ -135,6 +133,7 @@ namespace BandrBackEnd.DataAccess
                     cmd.Parameters.AddWithValue("@userBio", user.userBio);
                     cmd.Parameters.AddWithValue("@location", user.location);
                     cmd.Parameters.AddWithValue("@skillLevel", user.skillLevel);
+                    cmd.Parameters.AddWithValue("@id", user.Id);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -150,7 +149,7 @@ namespace BandrBackEnd.DataAccess
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                      DELETE FROM User
+                                      DELETE FROM [User]
                                       WHERE Id = @id
                                       ";
 

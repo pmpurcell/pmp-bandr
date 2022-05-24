@@ -19,7 +19,7 @@ namespace BandrBackEnd.DataAccess
         {
             get
             {
-                return new SqlConnection(_configuration.GetConnectionString("Default"));
+                return new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
             }
         }
 
