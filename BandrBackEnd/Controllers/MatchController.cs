@@ -44,22 +44,23 @@ namespace BandrBackEnd.Controllers
             }
         }
 
-        [HttpPatch("match/id")]
+        [HttpPatch("{id}")]
 
         public ActionResult updateMatch(int id, Match updateMatch)
         {
-            try
+            Match match = _matchRepository.getMatch(id);
+            if (match != null)
             {
                 _matchRepository.updateMatch(updateMatch);
-                return Ok();
+                return Ok(updateMatch);
             }
-            catch (Exception ex)
+            else
             {
                 return BadRequest(updateMatch);
             }
         }
 
-        [HttpDelete("match/id")]
+        [HttpDelete("{id}")]
         public ActionResult deleteMatch(int id)
         {
             try
