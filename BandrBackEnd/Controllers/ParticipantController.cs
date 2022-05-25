@@ -56,7 +56,7 @@ namespace BandrBackEnd.Controllers
 
             catch (Exception ex)
             {
-                return BadRequest("DELETE FAILED");
+                return BadRequest(ex.Message);
             }
         }
     }
