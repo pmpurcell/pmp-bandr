@@ -32,12 +32,15 @@ namespace BandrBackEnd.DataAccess
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT
-                                        Id,
-                                        UserId,
-                                        InstrumentId
-                                        
-                                        FROM PlayedInstruments WHERE UserId = @userId
+                                       SELECT
+                                       p.Id,
+                                       p.UserId,
+                                       p.InstrumentId,
+                                       i.InstrumentName
+                                       
+                                       FROM PlayedInstruments as p
+                                       LEFT JOIN Instrument as i on p.InstrumentId = i.Id
+                                       WHERE UserId = @userId
                                         ";
 
                     cmd.Parameters.AddWithValue("@userId", userId);
@@ -51,7 +54,9 @@ namespace BandrBackEnd.DataAccess
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                            InstrumentId = reader.GetInt32(reader.GetOrdinal("InstrumentId"))
+                            InstrumentId = reader.GetInt32(reader.GetOrdinal("InstrumentId")),
+                            Instrument = new Instrument() {Id = reader.GetInt32(reader.GetOrdinal("Id")),InstrumentName = reader.GetString(reader.GetOrdinal("InstrumentName"))
+                            }
                         };
                         playedInstruments.Add(playedInstrument);
                     }
@@ -70,11 +75,14 @@ namespace BandrBackEnd.DataAccess
                 {
                     cmd.CommandText = @"
                                         SELECT
-                                        Id,
-                                        UserId,
-                                        InstrumentId
+                                        p.Id,
+                                        p.UserId,
+                                        p.InstrumentId,
+                                        i.InstrumentName
                                         
-                                        FROM PlayedInstruments WHERE Id = @id
+                                        FROM PlayedInstruments as p
+                                        LEFT JOIN Instrument as i on p.InstrumentId = i.Id
+                                        WHERE p.Id = @id
                                         ";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -87,7 +95,12 @@ namespace BandrBackEnd.DataAccess
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                            InstrumentId = reader.GetInt32(reader.GetOrdinal("InstrumentId"))
+                            InstrumentId = reader.GetInt32(reader.GetOrdinal("InstrumentId")),
+                            Instrument = new Instrument()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                InstrumentName = reader.GetString(reader.GetOrdinal("InstrumentName"))
+                            }
                         };
 
                         reader.Close();
