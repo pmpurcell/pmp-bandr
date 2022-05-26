@@ -51,6 +51,24 @@ SELECT * FROM Genre
 
 INSERT INTO PlayedInstruments(UserId, instrumentId) VALUES (2,2);
 
+INSERT INTO PlayedGenres(UserId, genreId) VALUES (1,1);
+INSERT INTO PlayedGenres(UserId, genreId) VALUES (1,2);
+INSERT INTO PlayedGenres(UserId, genreId) VALUES (1,3);
+INSERT INTO PlayedGenres(UserId, genreId) VALUES (2,1);
+INSERT INTO PlayedGenres(UserId, genreId) VALUES (2,2);
+INSERT INTO PlayedGenres(UserId, genreId) VALUES (2,3);
+
+                                       SELECT
+                                       p.Id,
+                                       p.UserId,
+                                       p.GenreId,
+                                       g.GenreName
+                                       
+                                       FROM PlayedGenres as p
+                                       LEFT JOIN Genre as g on p.GenreId = g.Id
+                                       WHERE UserId = 1
+
+
 SELECT
 p.Id,
 p.UserId,

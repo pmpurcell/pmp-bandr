@@ -15,6 +15,7 @@ builder.Services.AddTransient<IParticipantRepository, ParticipantRepository>();
 builder.Services.AddTransient<IInstrumentRepository, InstrumentRepository>();
 builder.Services.AddTransient<IGenreRepository, GenreRepository>();
 builder.Services.AddTransient<IPlayedInstrumentRepository, PlayedInstrumentRepository>();
+builder.Services.AddTransient<IPlayedGenreRepository, PlayedGenreRepository>();
 
 var app = builder.Build();
 
