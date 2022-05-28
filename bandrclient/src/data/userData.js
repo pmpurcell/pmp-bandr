@@ -15,7 +15,7 @@ const checkUserCreatedInDB = async () => {
 };
 
 const getSingleUser = (userId) => new Promise((resolve, reject) => {
-    axios
+    axiosc
         .get(`${baseURL}/User?Id=${userId}`).then((response) => resolve(response.data))
         .catch(reject);
  })
