@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using BandrBackEnd.DataAccess;
 using BandrBackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BandrBackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
