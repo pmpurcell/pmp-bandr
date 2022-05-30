@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BandrBackEnd.DataAccess;
 using BandrBackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BandrBackEnd.Controllers
 {
@@ -17,6 +18,21 @@ namespace BandrBackEnd.Controllers
         }
 
         [HttpGet]
+        public ActionResult getAllUsers()
+        {
+            List<User> users = _userRepository.getAllUsers();
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(users);
+            }
+        }
+
+        [HttpGet("{id}")]
         public ActionResult getSingleUser(int Id)
         {
             User user = _userRepository.getSingleUser(Id);
