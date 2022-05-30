@@ -23,6 +23,53 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
+        public List<User> getAllUsers()
+        {
+            using (SqlConnection conn = Connection)
+            {
+
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        SELECT
+                                        Id,
+                                        firebaseUid,
+                                        photo,
+                                        userName,
+                                        userAge,
+                                        userBio,
+                                        location,
+                                        skillLevel
+                                        FROM
+                                        [User]
+                                        ";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List <User> users = new List<User>();
+
+                   while (reader.Read())
+                    {
+                        User user = new User
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            photo = reader.GetString(reader.GetOrdinal("photo")),
+                            userName = reader.GetString(reader.GetOrdinal("username")),
+                            userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
+                            userBio = reader.GetString(reader.GetOrdinal("userBio")),
+                            skillLevel = reader.GetString(reader.GetOrdinal("skillLevel")),
+                        };
+
+                        users.Add(user);
+
+                    }
+                        reader.Close();
+                        return users;
+                }
+            }
+        }
+
         public User getSingleUser(int Id)
         {
             using (SqlConnection conn = Connection)

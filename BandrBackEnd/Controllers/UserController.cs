@@ -8,7 +8,6 @@ namespace BandrBackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -19,6 +18,21 @@ namespace BandrBackEnd.Controllers
         }
 
         [HttpGet]
+        public ActionResult getAllUsers()
+        {
+            List<User> users = _userRepository.getAllUsers();
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(users);
+            }
+        }
+
+        [HttpGet("{id}")]
         public ActionResult getSingleUser(int Id)
         {
             User user = _userRepository.getSingleUser(Id);

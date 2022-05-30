@@ -3,11 +3,25 @@ import logo from './logo.svg';
 import './App.css';
 import { Button } from 'reactstrap';
 import auth from './data/firebaseAuth';
-import { checkUserCreatedInDB, getSingleUser, signInUser, signOutUser } from './data/userData';
+import { checkUserCreatedInDB, getAllUsers, getSingleUser, signInUser, signOutUser } from './data/userData';
 
 function App() {
   // const [user, setUser] = useState(null);
-  const [match, setMatch] = useState(null);
+  const [userList, setUserList] = useState([]);
+  const [match, setMatch] = useState({});
+
+  useEffect(() => {
+  let isMounted = true;
+
+    getAllUsers().then((response) => {
+      if (isMounted){
+        setUserList(response)
+      }},);
+    return () => {
+      isMounted = false
+    }
+  }, [userList]);
+  
 
 //   useEffect(() => {
 //     auth.onAuthStateChanged(async (response) => {
@@ -38,8 +52,8 @@ function App() {
 // }, []);
 
 const findMatch = () => {
-let random = 1
-getSingleUser(random).then(response => console.warn(response))
+let random = Math.floor(Math.random() * userList.length);
+getSingleUser(random).then(response => setMatch(response))
 };
   
   return (
@@ -50,7 +64,7 @@ getSingleUser(random).then(response => console.warn(response))
           Welcome to Bandr!
         </p>
         {/* <p>{user.userName}</p> */}
-        {/* <p>{match.userName}</p> */}
+        <p>{match.userName}</p>
         <Button onClick={signInUser}>Sign In</Button>
         <Button onClick={signOutUser}>Sign Out</Button>
         <Button onClick={findMatch}>Find A Match</Button>

@@ -14,9 +14,15 @@ const checkUserCreatedInDB = async () => {
     });
 };
 
+const getAllUsers = () => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseURL}/user`).then((response) => resolve(response.data))
+    .catch(reject);
+});
+
 const getSingleUser = (userId) => new Promise((resolve, reject) => {
-    axiosc
-        .get(`${baseURL}/User?Id=${userId}`).then((response) => resolve(response.data))
+    axios
+        .get(`${baseURL}/User/${userId}`).then((response) => resolve(response.data))
         .catch(reject);
  })
 const signInUser = () => {
@@ -32,6 +38,7 @@ const signInUser = () => {
 
 export {
 checkUserCreatedInDB,
+getAllUsers,
 signInUser,
 signOutUser,
 getSingleUser
