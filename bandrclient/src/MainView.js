@@ -54,6 +54,7 @@ function MainView() {
 
 const findMatch = () => {
 let random = Math.floor(Math.random() * userList.length + 1);
+console.warn(random);
 getSingleUser(random).then(response => setMatch(response))
 };
   
