@@ -4,8 +4,9 @@ import './App.css';
 import { Button } from 'reactstrap';
 import auth from './data/firebaseAuth';
 import { checkUserCreatedInDB, getAllUsers, getSingleUser, signInUser, signOutUser } from './data/userData';
+import UserCard from './components/UserCard';
 
-function App() {
+function MainView() {
   // const [user, setUser] = useState(null);
   const [userList, setUserList] = useState([]);
   const [match, setMatch] = useState({});
@@ -52,19 +53,17 @@ function App() {
 // }, []);
 
 const findMatch = () => {
-let random = Math.floor(Math.random() * userList.length);
+let random = Math.floor(Math.random() * userList.length + 1);
 getSingleUser(random).then(response => setMatch(response))
 };
   
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Welcome to Bandr!
         </p>
-        {/* <p>{user.userName}</p> */}
-        <p>{match.userName}</p>
+        <UserCard user={match} />
         <Button onClick={signInUser}>Sign In</Button>
         <Button onClick={signOutUser}>Sign Out</Button>
         <Button onClick={findMatch}>Find A Match</Button>
@@ -73,4 +72,4 @@ getSingleUser(random).then(response => setMatch(response))
   );
 }
 
-export default App;
+export default MainView;
