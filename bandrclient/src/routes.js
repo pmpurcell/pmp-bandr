@@ -1,18 +1,22 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import React from 'react'
 import UserView from './views/UserView';
+import MessagesView from './views/MessagesView';
+import EditView from './views/EditView';
+import DirectMessageView from './views/DirectMessageView';
+import SettingsView from './views/SettingsView';
+import SwipeView from './views/SwipeView';
 
-export default function Routes() {
+export default function Routing() {
   return (
     <>
     <Routes>
-        <Route path="/user/:id" element={UserView} />
-        <Route path="/user/edit/:id" element={UserView} />
-        <Route path="/messages" />
-        <Route path="/messages/:convoId" />
-        <Route path="/settings" />
+        <Route path="/" element={<SwipeView />} />
+        <Route path="/user/:id" element={<UserView />} />
+        <Route path="/user/edit/:id" element={<EditView />} />
+        <Route path="/messages" element={<MessagesView />} />
+        <Route path="/messages/:convoId" element={<DirectMessageView />} />
+        <Route path="/settings" element={<SettingsView />} />
     </Routes>
     </>
   )
