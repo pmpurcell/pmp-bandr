@@ -89,5 +89,32 @@ namespace BandrBackEnd.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
+        [HttpGet("Auth")]
+        public async Task<IActionResult> GetUserAuthStatus()
+        {
+            string uid = User.FindFirst(claim => claim.Type == "user_id").Value;
+            bool userexists = _userRepository.checkUserExists(uid);
+            if (!userexists)
+            {
+                User userFromToken = new User()
+                {
+                    firebaseUid = uid,
+                    photo = "",
+                    userName = User.Identity.Name,
+                    userAge = 0,
+                    userBio = "",
+                    location= "",
+                    skillLevel= ""
+                    
+                };
+
+                _userRepository.createUser(userFromToken);
+                return Ok();
+            }
+            User existingUser = _userRepository.getUserByFirebaseId(uid);
+            return Ok(existingUser);
+        }
     }
 }
