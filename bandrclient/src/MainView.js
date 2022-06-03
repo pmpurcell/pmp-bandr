@@ -19,7 +19,7 @@ function MainView() {
             
             //you can also do this to save the token for later use
             sessionStorage.setItem("token", response.accessToken);
-            checkUserCreatedInDB();
+            checkUserCreatedInDB(response.accessToken);
 
         } else {
             setUser({});
