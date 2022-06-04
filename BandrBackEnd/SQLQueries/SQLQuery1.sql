@@ -90,7 +90,7 @@ userBio VARCHAR(255),
 [skillLevel] VARCHAR(255),
 );
 
-SELECT * FROM [USER]
+SELECT * FROM [USER] WHERE firebaseUid = 'lr879dsyh4VcvUbobsazeDViRvz2'
 
 DROP TABLE [User];
 

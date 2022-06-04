@@ -23,7 +23,14 @@ const getSingleUser = (userId) => new Promise((resolve, reject) => {
     axios
         .get(`${baseURL}/User/${userId}`).then((response) => resolve(response.data))
         .catch(reject);
- })
+ });
+
+ const getSingleUserByFID = (firebaseId) => new Promise((resolve, reject) => {
+  axios
+      .get(`${baseURL}/User/firebase/${firebaseId}`).then((response) => resolve(response.data))
+      .catch(reject);
+});
+
 const signInUser = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
@@ -40,5 +47,6 @@ checkUserCreatedInDB,
 getAllUsers,
 signInUser,
 signOutUser,
-getSingleUser
+getSingleUser,
+getSingleUserByFID
 };

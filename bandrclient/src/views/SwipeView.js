@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { Button } from 'reactstrap';
-import { getAllUsers, getSingleUser, signInUser, signOutUser } from '../data/userData';
+import { getAllUsers, getSingleUser, getSingleUserByFID, signInUser, signOutUser } from '../data/userData';
 import UserCard from '../components/UserCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function SwipeView({ user }) {
     const [userList, setUserList] = useState([]);
     const [match, setMatch] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         let isMounted = true;
@@ -26,14 +28,18 @@ export default function SwipeView({ user }) {
             getSingleUser(random).then(response => setMatch(response))
             };
 
+        const myProfile = (firebaseUid) => {
+getSingleUserByFID(firebaseUid).then((response) => navigate(`/user/${response.id}`));
+        }
+
   return (
     <div>
       <p>Welcome to Bandr!</p>
       <UserCard user={match}/>
-      <p>{user.name}</p>
       <Button onClick={signInUser}>Sign In</Button>
       <Button onClick={signOutUser}>Sign Out</Button>
       <Button onClick={findMatch}>Find A Match</Button>
+      <Button onClick={() => {myProfile(user.firebaseId)}}>My Profile</Button>
     </div>
   )
 }
