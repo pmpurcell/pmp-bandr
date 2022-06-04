@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom';
 import { getSingleUser } from '../data/userData';
 import { Link } from 'react-router-dom';
 import { getPlayedInstruments } from '../data/instrumentData';
+import { getPlayedGenres } from '../data/genreData';
 
 export default function UserView() {
 const [profile, setProfile] = useState({});
 const [instruments, setInstruments] = useState([]);
+const [genres, setGenres] = useState([]);
+
 
 const { id } = useParams();
 
@@ -14,7 +17,8 @@ const { id } = useParams();
     let isMounted = true;
     if (isMounted) {
      getSingleUser(id).then((profile) => setProfile(profile));
-     getPlayedInstruments(id).then((instruments => setInstruments(instruments)));
+     getPlayedInstruments(id).then((instrumentArr => setInstruments(instrumentArr)));
+     getPlayedGenres(id).then((genreArr) => setGenres(genreArr));
     }
     return () => {
       isMounted = false;
@@ -32,6 +36,10 @@ const { id } = useParams();
       <p>Instruments</p>
       {instruments.map((instrument) => (
           <p>{instrument.instrument.instrumentName}</p>
+        ))}
+              <p>Genres</p>
+      {genres.map((genre) => (
+          <p>{genre.genre.genreName}</p>
         ))}
       <Link to="/">Go Back</Link>
     </div>
