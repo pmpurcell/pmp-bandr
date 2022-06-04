@@ -54,6 +54,7 @@ namespace BandrBackEnd.DataAccess
                         User user = new User
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            firebaseUid = reader.GetString(reader.GetOrdinal("firebaseUid")),
                             photo = reader.GetString(reader.GetOrdinal("photo")),
                             userName = reader.GetString(reader.GetOrdinal("username")),
                             userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
@@ -120,6 +121,56 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
+        public User getUserByFirebaseId(string uid)
+        {
+            using (SqlConnection conn = Connection)
+            {
+
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        SELECT
+                                        Id,
+                                        firebaseUid,
+                                        Photo,
+                                        UserName,
+                                        UserAge,
+                                        UserBio,
+                                        [Location],
+                                        SkillLevel
+                                        FROM
+                                        [User] WHERE firebaseUid = @uid
+                                        ";
+
+                    cmd.Parameters.AddWithValue("@uid", uid);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        User user = new User
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            photo = reader.GetString(reader.GetOrdinal("photo")),
+                            userName = reader.GetString(reader.GetOrdinal("username")),
+                            userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
+                            userBio = reader.GetString(reader.GetOrdinal("userBio")),
+                            skillLevel = reader.GetString(reader.GetOrdinal("skillLevel")),
+                        };
+
+                        reader.Close();
+                        return user;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
+
         public void createUser(User user)
         {
             using(SqlConnection conn = Connection)
@@ -129,16 +180,19 @@ namespace BandrBackEnd.DataAccess
                     {
                         cmd.CommandText = @"
                                         INSERT INTO [User]
-                                        (Photo,
+                                        (
+                                        firebaseUid,
+                                        Photo,
                                         UserName,
                                         UserAge,
                                         UserBio,
-                                        Location,
+                                        [Location],
                                         SkillLevel)
 
                                         OUTPUT Inserted.Id
-                                        VALUES (@photo, @userName, @userAge, @userBio, @location, @skillLevel)";
+                                        VALUES (@firebaseUid, @photo, @userName, @userAge, @userBio, @location, @skillLevel)";
 
+                        cmd.Parameters.AddWithValue("@firebaseUid", user.firebaseUid);
                         cmd.Parameters.AddWithValue("@photo", user.photo);
                         cmd.Parameters.AddWithValue("@userName", user.userName);
                         cmd.Parameters.AddWithValue("@userAge", user.userAge);
@@ -169,7 +223,7 @@ namespace BandrBackEnd.DataAccess
                                       UserName = @userName,
                                       UserAge = @userAge,
                                       UserBio = @userBio,
-                                      Location = @location,
+                                      [Location] = @location,
                                       SkillLevel = @skillLevel
 
                                       WHERE Id = @id";
@@ -204,6 +258,33 @@ namespace BandrBackEnd.DataAccess
 
                     cmd.ExecuteNonQuery();
 
+                }
+            }
+        }
+        public bool checkUserExists(string uid)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT *
+                                        FROM [User]
+										WHERE firebaseUid = @uid";
+                    
+                    cmd.Parameters.AddWithValue("@uid", uid);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return false;
+                    }
                 }
             }
         }

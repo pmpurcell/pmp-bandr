@@ -9,8 +9,11 @@ namespace BandrBackEnd.DataAccess
     {
         public List<User> getAllUsers();
         public User getSingleUser(int firebaseUid);
+
+        public User getUserByFirebaseId(string uid);
         public void createUser(User user);
         public void updateUser(User user);
         public void deleteUser(int id);
+        public bool checkUserExists(string uid);
     }
 }
