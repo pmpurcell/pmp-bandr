@@ -54,6 +54,7 @@ namespace BandrBackEnd.DataAccess
                         User user = new User
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            firebaseUid = reader.GetString(reader.GetOrdinal("firebaseUid")),
                             photo = reader.GetString(reader.GetOrdinal("photo")),
                             userName = reader.GetString(reader.GetOrdinal("username")),
                             userAge = reader.GetInt32(reader.GetOrdinal("userAge")),

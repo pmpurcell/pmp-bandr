@@ -35,7 +35,7 @@ function MainView() {
   return (
     <div className="App">
       <header className="App-header">
-      <Routing></Routing>
+      <Routing user={user}></Routing>
       </header>
     </div>
   );

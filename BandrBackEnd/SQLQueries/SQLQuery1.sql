@@ -78,3 +78,31 @@ i.InstrumentName
 FROM PlayedInstruments as p
 LEFT JOIN Instrument as i on p.InstrumentId = i.Id
 WHERE UserId = 2
+
+CREATE TABLE [User](
+Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
+firebaseUid VARCHAR(255) NOT NULL,
+photo VARCHAR(255),
+userName VARCHAR(255) NOT NULL,
+userAge INT,
+userBio VARCHAR(255),
+[location] VARCHAR(255),
+[skillLevel] VARCHAR(255),
+);
+
+SELECT * FROM [USER]
+
+DROP TABLE [User];
+
+INSERT INTO [User]
+(
+firebaseUid,
+Photo,
+UserName,
+UserAge,
+UserBio,
+[Location],
+SkillLevel)
+
+OUTPUT Inserted.Id
+VALUES ('asdfasdfrgaga', '', 'Sam', 28, '', 'Nashville', 'Advanced')
