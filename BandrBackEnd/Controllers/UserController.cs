@@ -46,6 +46,20 @@ namespace BandrBackEnd.Controllers
             }
         }
 
+        [HttpGet("firebase/{firebaseId}")]
+        public ActionResult getUserByFirebaseId(String firebaseId)
+        {
+            User user = _userRepository.getUserByFirebaseId(firebaseId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(user);
+            }
+        }
+
         [HttpPost]
         public ActionResult createUser(User newUser)
         {

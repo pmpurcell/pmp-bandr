@@ -59,6 +59,7 @@ namespace BandrBackEnd.DataAccess
                             userName = reader.GetString(reader.GetOrdinal("username")),
                             userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
                             userBio = reader.GetString(reader.GetOrdinal("userBio")),
+                            location = reader.GetString(reader.GetOrdinal("location")),
                             skillLevel = reader.GetString(reader.GetOrdinal("skillLevel")),
                         };
 
@@ -102,10 +103,12 @@ namespace BandrBackEnd.DataAccess
                         User user = new User
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            firebaseUid = reader.GetString(reader.GetOrdinal("firebaseUid")),
                             photo = reader.GetString(reader.GetOrdinal("photo")),
                             userName = reader.GetString(reader.GetOrdinal("username")),
                             userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
                             userBio = reader.GetString(reader.GetOrdinal("userBio")),
+                            location = reader.GetString(reader.GetOrdinal("location")),
                             skillLevel = reader.GetString(reader.GetOrdinal("skillLevel")),
                         };
 
@@ -152,10 +155,12 @@ namespace BandrBackEnd.DataAccess
                         User user = new User
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            firebaseUid = reader.GetString(reader.GetOrdinal("firebaseUid")),
                             photo = reader.GetString(reader.GetOrdinal("photo")),
                             userName = reader.GetString(reader.GetOrdinal("username")),
                             userAge = reader.GetInt32(reader.GetOrdinal("userAge")),
                             userBio = reader.GetString(reader.GetOrdinal("userBio")),
+                            location = reader.GetString(reader.GetOrdinal("location")),
                             skillLevel = reader.GetString(reader.GetOrdinal("skillLevel")),
                         };
 
