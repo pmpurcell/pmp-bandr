@@ -28,7 +28,7 @@ const { id } = useParams();
   return (
     <div>
       <h3>UserView</h3>
-      <img src={profile.photo} alt={profile.userName} width='250px' height='300px' />
+      <img src={profile.photo || "https://i.pinimg.com/originals/e4/03/de/e403de788507db2505774f48f70a8eab.png"} alt={profile.userName} width='250px' height='300px' />
       <p>{profile.userName}</p>
       <p>{profile.userAge}</p>
       <p>{profile.location}</p>
