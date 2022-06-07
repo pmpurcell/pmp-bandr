@@ -19,7 +19,7 @@ namespace BandrBackEnd.Controllers
         [HttpGet]
         public ActionResult getMatch(int id)
         {
-            Match match = _matchRepository.getMatch(id);
+            Match match = _matchRepository.getMatchByRecId(id);
             if (match == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace BandrBackEnd.Controllers
 
         public ActionResult updateMatch(int id, Match updateMatch)
         {
-            Match match = _matchRepository.getMatch(id);
+            Match match = _matchRepository.getMatchByRecId(id);
             if (match != null)
             {
                 _matchRepository.updateMatch(updateMatch);
@@ -72,6 +72,44 @@ namespace BandrBackEnd.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Match/Relationship")]
+        public IActionResult FindRelationship(int recId, int swiperId, bool matchBool)
+        {
+            bool matchexists = _matchRepository.checkMatchExists(recId, swiperId);
+            if (!matchexists)
+            {
+                Match newMatch = new Match()
+                {
+                    swiperId = recId,
+                    swiperMatch = matchBool,
+                    recId = swiperId,
+                    recMatch = false,
+
+                };
+
+                _matchRepository.createMatch(newMatch);
+                return Ok(newMatch);
+            } else if (matchexists)
+            {
+            // Match existingMatch = _matchRepository.getMatchByRecId(recId); //
+            Match updateMatch = new Match()
+            {
+                swiperId = swiperId,
+                recId = recId,
+                recMatch = matchBool,
+
+            };
+
+                _matchRepository.updateMatch(updateMatch);
+                // Check value of relationships in updateMethod //
+                return Ok(updateMatch);
+            }
+            else
+            {
+                return BadRequest();
             }
         }
     }

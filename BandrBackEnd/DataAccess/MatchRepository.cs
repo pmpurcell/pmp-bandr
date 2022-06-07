@@ -23,7 +23,7 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
-        public Match getMatch(int id)
+        public Match getMatchByRecId(int recId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -40,10 +40,10 @@ namespace BandrBackEnd.DataAccess
                                        RecMatch
                                        
                                        FROM
-                                       [Match] WHERE Id = @id
+                                       [Match] WHERE recId = @recId
                                        ";
 
-                    cmd.Parameters.AddWithValue("Id", id);
+                    cmd.Parameters.AddWithValue("@recId", recId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -65,6 +65,38 @@ namespace BandrBackEnd.DataAccess
                     {
                         reader.Close();
                         return null;
+                    }
+                }
+            }
+        }
+
+        public bool checkMatchExists(int recId, int swiperId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT *
+                                        FROM [Match]
+										WHERE RecId = @recId
+                                        AND SwiperId = @swiperId";
+
+                    // Check for SwiperId As Well//
+
+                    cmd.Parameters.AddWithValue("@recId", recId);
+                    cmd.Parameters.AddWithValue("@swiperId", swiperId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return false;
                     }
                 }
             }
