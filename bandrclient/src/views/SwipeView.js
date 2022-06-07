@@ -34,8 +34,8 @@ getSingleUserByFID(firebaseUid).then((response) => navigate(`/user/${response.id
 
   return (
     <div>
-      <p>Welcome to Bandr!</p>
-      <UserCard user={match}/>
+      <p>Welcome to Bandr, {user.name}!</p>
+      <UserCard user={user} match={match}/>
       <Button onClick={signInUser}>Sign In</Button>
       <Button onClick={signOutUser}>Sign Out</Button>
       <Button onClick={findMatch}>Find A Match</Button>
