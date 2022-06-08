@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-const baseURL = 'https://localhost:7205/api'
+const baseURL = 'https://localhost:7205'
+
+const checkRelationship = (recId, swiperId, matchBool) => new Promise((resolve, reject) => {
+    console.warn(`${recId}, ${swiperId}, ${matchBool}`)
+    axios
+        .get(`${baseURL}/Relationship/${recId}/${swiperId}/${matchBool}`)
+        .then((response) => resolve(response.data))
+        .catch(reject);
+})
 
 const createMatch = (matchObj) => new Promise((resolve, reject) => {
     axios
@@ -9,4 +17,4 @@ const createMatch = (matchObj) => new Promise((resolve, reject) => {
         .catch(reject);
 });
 
-export default createMatch;
+export {createMatch, checkRelationship};

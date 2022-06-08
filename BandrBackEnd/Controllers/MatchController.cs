@@ -75,7 +75,7 @@ namespace BandrBackEnd.Controllers
             }
         }
 
-        [HttpGet("Match/Relationship")]
+        [HttpGet("/Relationship/{recId}/{swiperId}/{matchBool}")]
         public IActionResult FindRelationship(int recId, int swiperId, bool matchBool)
         {
             bool matchexists = _matchRepository.checkMatchExists(recId, swiperId);
@@ -102,10 +102,16 @@ namespace BandrBackEnd.Controllers
                 recMatch = matchBool,
 
             };
-
+                Console.WriteLine(updateMatch);
                 _matchRepository.updateMatch(updateMatch);
                 // Check value of relationships in updateMethod //
+                if(updateMatch.recMatch == true && updateMatch.swiperMatch == true)
+                {
                 return Ok(updateMatch);
+                } else
+                {
+                    return Ok(updateMatch);
+                }
             }
             else
             {
