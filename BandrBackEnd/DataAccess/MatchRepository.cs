@@ -23,7 +23,7 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
-        public Match getMatchByRecId(int recId)
+        public Match getMatchByIds(int recId, int swiperId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -40,10 +40,11 @@ namespace BandrBackEnd.DataAccess
                                        RecMatch
                                        
                                        FROM
-                                       [Match] WHERE recId = @recId
+                                       [Match] WHERE recId = @recId AND SwiperId = @swiperId
                                        ";
 
                     cmd.Parameters.AddWithValue("@recId", recId);
+                    cmd.Parameters.AddWithValue("@swiperId", swiperId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

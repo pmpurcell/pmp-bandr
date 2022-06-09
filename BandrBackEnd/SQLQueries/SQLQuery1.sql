@@ -1,9 +1,11 @@
 ﻿INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 0, 7, 1);
 INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 1, 2, 1);
-INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (3, 0, 4, 1);
-INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (8, 0, 1, 0);
+INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (7, 0, 1, 0);
+INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (8, 1, 1, 0);
 
 SELECT * FROM [Match]
+
+DELETE FROM [Match]
 
 SELECT * FROM [User]
 

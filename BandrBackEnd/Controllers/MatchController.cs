@@ -17,9 +17,9 @@ namespace BandrBackEnd.Controllers
         }
 
         [HttpGet]
-        public ActionResult getMatch(int id)
+        public ActionResult getMatch(int recId, int swiperId)
         {
-            Match match = _matchRepository.getMatchByRecId(id);
+            Match match = _matchRepository.getMatchByIds(recId, swiperId);
             if (match == null)
             {
                 return NotFound();
@@ -46,9 +46,9 @@ namespace BandrBackEnd.Controllers
 
         [HttpPatch("{id}")]
 
-        public ActionResult updateMatch(int id, Match updateMatch)
+        public ActionResult updateMatch(int recId, int swiperId, Match updateMatch)
         {
-            Match match = _matchRepository.getMatchByRecId(id);
+            Match match = _matchRepository.getMatchByIds(recId, swiperId);
             if (match != null)
             {
                 _matchRepository.updateMatch(updateMatch);
@@ -95,24 +95,22 @@ namespace BandrBackEnd.Controllers
             } else if (matchexists)
             {
             // Match existingMatch = _matchRepository.getMatchByRecId(recId); //
+            Match match = _matchRepository.getMatchByIds(recId, swiperId);
+
             Match updateMatch = new Match()
             {
                 swiperId = swiperId,
+                swiperMatch = match.swiperMatch,
                 recId = recId,
                 recMatch = matchBool,
 
             };
-                Console.WriteLine(updateMatch);
+
                 _matchRepository.updateMatch(updateMatch);
                 // Check value of relationships in updateMethod //
-                if(updateMatch.recMatch == true && updateMatch.swiperMatch == true)
-                {
-                return Ok(updateMatch);
-                } else
-                {
+
                     return Ok(updateMatch);
                 }
-            }
             else
             {
                 return BadRequest();
