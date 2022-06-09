@@ -41,7 +41,7 @@ const { id } = useParams();
       {genres.map((genre) => (
           <p>{genre.genre.genreName}</p>
         ))}
-      <Link to="/">Go Back</Link>
+      <Link to="/swipe">Go Back</Link>
     </div>
   )
 }

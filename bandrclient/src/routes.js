@@ -17,7 +17,7 @@ export default function Routing({ user }) {
     <Routes>
         <Route path="/" element={<LoginView />} />
         <Route path="/swipe" element={<SwipeView user={user} />} />
-        <Route path="/match" element={<MatchView />} />
+        <Route path="/match" element={<MatchView user={user} />} />
         <Route path="/user/:id" element={<UserView />} />
         <Route path="/user/edit/:id" element={<EditView />} />
         <Route path="/messages" element={<MessagesView />} />

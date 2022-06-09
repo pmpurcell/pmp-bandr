@@ -1,32 +1,28 @@
-// import React from 'react'
-// import PropTypes from "prop-types";
-// import { Modal, Button } from 'reactstrap';
+import { Modal, Button } from 'reactstrap';
+import { React, useState } from 'react';
 
-// export default function MatchModal({show, onHide, user, match}) {
-//   return (
-//     <Modal.Dialog show>
-//   <Modal.Header closeButton>
-//     <Modal.Title> It's A Match!</Modal.Title>
-//   </Modal.Header>
+function ModalDetails() {
+  const [show, setShow] = useState(false);
 
-//   <Modal.Body>
-//     <p>{user.name}</p>
-//     <p>{match.userName}</p>
-//   </Modal.Body>
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-//   <Modal.Footer>
-//     <Button variant="secondary">Keep Swiping</Button>
-//     <Button variant="primary">Go To Messages</Button>
-//   </Modal.Footer>
-// </Modal.Dialog>
-//   )
-// }
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+      <Modal isOpen={show}>
+        <div className="modal-details">
+          <div className="col-auto">
+          </div>
+          <h1 className="card-title">Modal</h1>
+          <p className="card-text">Modal</p>
+          <Button onClick={handleClose}> Close Window </Button>
+        </div>
+      </Modal>
+    </>
+  );
+}
 
-// MatchModal.propTypes = {
-//     user: PropTypes.shape({
-//     }).isRequired,
-//     match: PropTypes.shape({
-//     }).isRequired,
-//     show: PropTypes.bool.isRequired,
-//     onHide: PropTypes.func.isRequired
-//   };
+export default ModalDetails;

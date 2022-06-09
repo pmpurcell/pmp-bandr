@@ -29,7 +29,7 @@ export default function UserCard({ user, match }) {
         console.warn(response)
         if (response.recMatch && response.swiperMatch) {
           console.warn("It's a match!");
-          navigate("/match");
+          navigate("/match", user, match);
         } else {
           console.warn(response);
           console.warn("Nope!");
