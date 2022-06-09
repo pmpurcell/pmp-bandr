@@ -1,11 +1,11 @@
 ﻿INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 0, 7, 1);
 INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 1, 2, 1);
-INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (3, 0, 4, 1);
-INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 1, 5, 0);
+INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (7, 0, 1, 0);
+INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (8, 1, 1, 0);
 
 SELECT * FROM [Match]
 
-DELETE FROM [Match] WHERE Id = 5;
+DELETE FROM [Match]
 
 SELECT * FROM [User]
 
@@ -106,3 +106,5 @@ SkillLevel)
 
 OUTPUT Inserted.Id
 VALUES ('asdfasdfrgaga', '', 'Sam', 28, '', 'Nashville', 'Advanced')
+
+SELECT * FROM [Match] WHERE SwiperId = 1 AND RecId = 8;

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function SwipeView({ user }) {
     const [userList, setUserList] = useState([]);
     const [match, setMatch] = useState({});
+
     const navigate = useNavigate();
 
     useEffect(() => {

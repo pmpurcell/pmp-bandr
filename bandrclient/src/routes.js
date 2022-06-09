@@ -8,6 +8,8 @@ import EditView from './views/EditView';
 import DirectMessageView from './views/DirectMessageView';
 import SettingsView from './views/SettingsView';
 import SwipeView from './views/SwipeView';
+import MatchView from './views/MatchView';
+
 
 export default function Routing({ user }) {
   return (
@@ -15,6 +17,7 @@ export default function Routing({ user }) {
     <Routes>
         <Route path="/" element={<LoginView />} />
         <Route path="/swipe" element={<SwipeView user={user} />} />
+        <Route path="/match" element={<MatchView />} />
         <Route path="/user/:id" element={<UserView />} />
         <Route path="/user/edit/:id" element={<EditView />} />
         <Route path="/messages" element={<MessagesView />} />
