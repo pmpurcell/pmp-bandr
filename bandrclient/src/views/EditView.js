@@ -6,15 +6,21 @@ import {
   getPlayedInstruments,
   getAllInstruments,
   addPlayedInstruments,
-  removePlayedInstruments
+  removePlayedInstruments,
 } from "../data/instrumentData";
-import { getPlayedGenres } from "../data/genreData";
+import {
+  getPlayedGenres,
+  getAllGenres,
+  addPlayedGenre,
+  removePlayedGenres,
+} from "../data/genreData";
 import { Button } from "reactstrap";
 
 export default function EditView() {
   const [profile, setProfile] = useState({});
   const [allInstruments, setAllInstruments] = useState([]);
   const [playedInstruments, setPlayedInstruments] = useState([]);
+  const [allGenres, setAllGenres] = useState([]);
   const [playedGenres, setPlayedGenres] = useState([]);
 
   const { id } = useParams();
@@ -29,6 +35,7 @@ export default function EditView() {
       getPlayedInstruments(id).then((instrumentArr) =>
         setPlayedInstruments(instrumentArr)
       );
+      getAllGenres().then((genreArr) => setAllGenres(genreArr));
       getPlayedGenres(id).then((genreArr) => setPlayedGenres(genreArr));
     }
     return () => {
@@ -44,6 +51,14 @@ export default function EditView() {
     removePlayedInstruments(instrumentId);
   };
 
+  const addGenres = (userId, genreId, genreName) => {
+    addPlayedGenre(userId, genreId, genreName);
+  };
+
+  const removeGenres = (genreId) => {
+    removePlayedGenres(genreId);
+  };
+
   return (
     <div>
       <h3>EditView</h3>
@@ -51,17 +66,47 @@ export default function EditView() {
       {playedInstruments.map((playedInstrument) => (
         <div>
           <p>{playedInstrument.instrument.instrumentName}</p>
-          <Button onClick={() => removeInstruments(playedInstrument.id)}>Remove</Button>
+          <Button onClick={() => removeInstruments(playedInstrument.id)}>
+            Remove
+          </Button>
         </div>
       ))}
       {allInstruments.map((instrument) => (
         <div>
           <p>{instrument.instrumentName}</p>
-          <Button onClick={() => addInstruments(profile.id, instrument.id, instrument.instrumentName)}> Add Instrument</Button>
+          <Button
+            onClick={() =>
+              addInstruments(
+                profile.id,
+                instrument.id,
+                instrument.instrumentName
+              )
+            }
+          >
+            {" "}
+            Add Instrument
+          </Button>
         </div>
       ))}
       {playedGenres.map((playedGenre) => (
-        <p>{playedGenre.genre.genreName}</p>
+        <div>
+          <p>{playedGenre.genre.genreName}</p>
+          <Button onClick={() => removeGenres(playedGenre.id)}>
+            Remove Genre
+          </Button>
+        </div>
+      ))}
+      {allGenres.map((genre) => (
+        <div>
+          <p>{genre.genreName}</p>
+          <Button
+            onClick={() => {
+              addGenres(profile.id, genre.id, genre.genreName);
+            }}
+          >
+            Add Genre
+          </Button>
+        </div>
       ))}
       <Link to="/swipe">Go Back</Link>
     </div>
