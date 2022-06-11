@@ -31,6 +31,12 @@ const getSingleUser = (userId) => new Promise((resolve, reject) => {
       .catch(reject);
 });
 
+const updateUserInfo = (userId, userObj) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${baseURL}/User/${userId}`, userObj).then((response) => resolve(response.data))
+    .catch(reject)
+});
+
 const signInUser = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
@@ -48,5 +54,6 @@ getAllUsers,
 signInUser,
 signOutUser,
 getSingleUser,
-getSingleUserByFID
+getSingleUserByFID,
+updateUserInfo
 };
