@@ -1,7 +1,8 @@
 import { Modal, Button } from 'reactstrap';
 import { React, useState } from 'react';
+import PropTypes from "prop-types";
 
-function ModalDetails() {
+export default function ModalDetails({user, match}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -12,17 +13,21 @@ function ModalDetails() {
       <Button variant="primary" onClick={handleShow}>
         Launch demo modal
       </Button>
-      <Modal isOpen={show}>
+      <Modal animation={false} isOpen={show}>
         <div className="modal-details">
           <div className="col-auto">
           </div>
-          <h1 className="card-title">Modal</h1>
-          <p className="card-text">Modal</p>
-          <Button onClick={handleClose}> Close Window </Button>
+          <h1 className="card-title">It's a match!!!</h1>
+          <p className="card-text">{user.name}</p>
+          <p className="card-text">{match.userName}</p>
+          <Button onClick={handleClose}> Keep Swiping </Button>
         </div>
       </Modal>
     </>
   );
 }
 
-export default ModalDetails;
+ModalDetails.propTypes = {
+  user: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
+};
