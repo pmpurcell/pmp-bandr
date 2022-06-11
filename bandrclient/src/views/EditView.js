@@ -5,7 +5,8 @@ import { getSingleUser } from "../data/userData";
 import {
   getPlayedInstruments,
   getAllInstruments,
-  addPlayedInstruments
+  addPlayedInstruments,
+  removePlayedInstruments
 } from "../data/instrumentData";
 import { getPlayedGenres } from "../data/genreData";
 import { Button } from "reactstrap";
@@ -39,6 +40,10 @@ export default function EditView() {
     addPlayedInstruments(userId, instrumentId, instrumentName);
   };
 
+  const removeInstruments = (instrumentId) => {
+    removePlayedInstruments(instrumentId);
+  };
+
   return (
     <div>
       <h3>EditView</h3>
@@ -46,7 +51,7 @@ export default function EditView() {
       {playedInstruments.map((playedInstrument) => (
         <div>
           <p>{playedInstrument.instrument.instrumentName}</p>
-          <Button>Remove</Button>
+          <Button onClick={() => removeInstruments(playedInstrument.id)}>Remove</Button>
         </div>
       ))}
       {allInstruments.map((instrument) => (

@@ -29,4 +29,15 @@ const addPlayedInstruments = (userId, instrumentId, instrumentName) => new Promi
         .catch(reject);
 })
 
-export { getAllInstruments, getPlayedInstruments, addPlayedInstruments };
+const removePlayedInstruments = (instrumentId) => new Promise((resolve, reject) => {
+    axios
+        .delete(`${baseURL}/PlayedInstrument/${instrumentId}`).then((response) => resolve(response.data))
+        .catch(reject);
+})
+
+export {
+    getAllInstruments,
+    getPlayedInstruments,
+    addPlayedInstruments,
+    removePlayedInstruments
+};
