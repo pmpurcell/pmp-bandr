@@ -47,6 +47,14 @@ export default function SwipeView({ user }) {
       navigate(`/user/edit/${response.id}`)
     );
   };
+
+  const viewMatches = (firebaseUid) => {
+    getSingleUserByFID(firebaseUid).then((response) =>
+      navigate(`/matches/${response.id}`)
+    );
+  };
+
+
   return (
     <div>
       <p>Welcome to Bandr, {user.name}!</p>
@@ -54,6 +62,7 @@ export default function SwipeView({ user }) {
       <Button onClick={signInUser}>Sign In</Button>
       <Button onClick={signOutUser}>Sign Out</Button>
       <Button onClick={findMatch}>Find A Match</Button>
+      <Button onClick={() => {viewMatches(user.firebaseId)}}>Messages</Button>
       <Button onClick={() => {editProfile(user.firebaseId)}}>Edit Profile</Button>
       <Button
         onClick={() => {

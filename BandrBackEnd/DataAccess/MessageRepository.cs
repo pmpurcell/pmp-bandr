@@ -23,7 +23,7 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
-        public List <Message> GetMessagesByPartId(int participantId)
+        public List <Message> GetMessagesByMatchId(int matchId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -34,15 +34,16 @@ namespace BandrBackEnd.DataAccess
                     cmd.CommandText = @"
                                        SELECT
                                        Id,
+                                       MatchId,
                                        ParticipantId,
                                        Body,
                                        TimeSent
                                        
                                        FROM
-                                       [Message] WHERE ParticipantId = @participantId
+                                       [Message] WHERE MatchId = @matchId
                                        ";
 
-                    cmd.Parameters.AddWithValue("ParticipantId", participantId);
+                    cmd.Parameters.AddWithValue("MatchId", matchId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -52,6 +53,7 @@ namespace BandrBackEnd.DataAccess
                         Message message = new Message
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            matchId = reader.GetInt32(reader.GetOrdinal("MatchId")),
                             participantId = reader.GetInt32(reader.GetOrdinal("ParticipantId")),
                             body = reader.GetString(reader.GetOrdinal("Body")),
                             timeSent = reader.GetDateTime(reader.GetOrdinal("TimeSent")),
@@ -77,6 +79,7 @@ namespace BandrBackEnd.DataAccess
                     cmd.CommandText = @"
                                        SELECT
                                        Id,
+                                       MatchId,
                                        ParticipantId,
                                        Body,
                                        TimeSent
@@ -94,6 +97,7 @@ namespace BandrBackEnd.DataAccess
                         Message message = new Message
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            matchId = reader.GetInt32(reader.GetOrdinal("MatchId")),
                             participantId = reader.GetInt32(reader.GetOrdinal("ParticipantId")),
                             body = reader.GetString(reader.GetOrdinal("Body")),
                             timeSent = reader.GetDateTime(reader.GetOrdinal("TimeSent")),
@@ -121,13 +125,15 @@ namespace BandrBackEnd.DataAccess
                     cmd.CommandText = @"
                                         INSERT INTO [Message]
                                        (ParticipantId,
+                                       MatchId
                                        Body,
                                        TimeSent)
                                         
                                         OUTPUT Inserted.Id
-                                        VALUES (@ParticipantId, @Body, @TimeSent)";
+                                        VALUES (@ParticipantId, @MatchId, @Body, @TimeSent)";
 
                     cmd.Parameters.AddWithValue("@ParticipantId", message.participantId);
+                    cmd.Parameters.AddWithValue("@MatchId", message.matchId);
                     cmd.Parameters.AddWithValue("@Body", message.body);
                     cmd.Parameters.AddWithValue("@TimeSent", message.timeSent);
 
@@ -150,6 +156,7 @@ namespace BandrBackEnd.DataAccess
                                       UPDATE [Message]
                                       SET
                                       ParticipantId = @ParticipantId,
+                                      MatchId = @MatchId,
                                       Body = @Body,
                                       TimeSent = @TimeSent
                                       
@@ -157,6 +164,7 @@ namespace BandrBackEnd.DataAccess
 
 
                     cmd.Parameters.AddWithValue("@ParticipantId", message.participantId);
+                    cmd.Parameters.AddWithValue("@MatchId", message.matchId);
                     cmd.Parameters.AddWithValue("@Body", message.body);
                     cmd.Parameters.AddWithValue("@TimeSent", message.timeSent);
                     cmd.Parameters.AddWithValue("@id", message.Id);

@@ -7,6 +7,8 @@ namespace BandrBackEnd.DataAccess
     public interface IMatchRepository
     {
         public Match getMatchByIds(int recId, int swiperId);
+
+        public List<Match> getUserMatches(int userId);
         public void createMatch(Match match);
         public void updateMatch(Match match);
         public void deleteMatch(int id);

@@ -71,6 +71,51 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
+        public List<Match> getUserMatches(int userId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                       SELECT
+                                       Id,
+                                       SwiperId,
+                                       SwiperMatch,
+                                       RecId,
+                                       RecMatch
+                                       
+                                       FROM
+                                       [Match] WHERE SwiperId = @userId OR RecId = @userId AND RecMatch = 1 AND SwiperMatch = 1;
+                                       ";
+
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Match> matches = new List<Match>();
+
+                    while (reader.Read())
+                    {
+                        Match match = new Match
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            swiperId = reader.GetInt32(reader.GetOrdinal("swiperId")),
+                            swiperMatch = reader.GetBoolean(reader.GetOrdinal("swiperMatch")),
+                            recId = reader.GetInt32(reader.GetOrdinal("recId")),
+                            recMatch = reader.GetBoolean(reader.GetOrdinal("recMatch"))
+                        };
+
+                        matches.Add(match);
+                    }
+                        reader.Close();
+                        return matches;
+                }
+            }
+        }
+
         public bool checkMatchExists(int recId, int swiperId)
         {
             using (SqlConnection conn = Connection)

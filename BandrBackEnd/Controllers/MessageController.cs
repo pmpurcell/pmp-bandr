@@ -16,11 +16,11 @@ namespace BandrBackEnd.Controllers
             _messageRepository = messageRepository;
         }
 
-        [HttpGet("participant/{participantId}")]
+        [HttpGet("match/{matchId}")]
 
-        public ActionResult getMessagesByPartId(int participantId)
+        public ActionResult getMessagesByMatchId(int matchId)
         {
-            List <Message> messages = _messageRepository.GetMessagesByPartId (participantId);
+            List <Message> messages = _messageRepository.GetMessagesByMatchId (matchId);
 
             if(messages == null)
             {
