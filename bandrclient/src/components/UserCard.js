@@ -21,12 +21,8 @@ export default function UserCard({ user, match }) {
       console.warn(response);
       console.warn(`User: ${response.id}
                     Recipient: ${match.id}`);
-      checkRelationship(
-        response.id,
-        match.id,
-        true
-      ).then((response) => {
-        console.warn(response)
+      checkRelationship(response.id, match.id, true).then((response) => {
+        console.warn(response);
         if (response.recMatch && response.swiperMatch) {
           console.warn("It's a match!");
           navigate("/match", user, match);
@@ -66,8 +62,7 @@ export default function UserCard({ user, match }) {
         <h3>{match.userName}</h3>
         <h3>{match.userAge}</h3>
       </div>
-      <div>
-      </div>
+      <div></div>
       <div className="button-div">
         <AiFillDislike onClick={() => swipeLeft()} />
         <AiFillQuestionCircle
