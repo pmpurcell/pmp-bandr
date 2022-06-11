@@ -18,8 +18,6 @@ function MainView() {
                 photo: response.photoURL,
             };
             setUser(user);
-
-            navigate('/swipe');
             
             //you can also do this to save the token for later use
             sessionStorage.setItem("token", response.accessToken);

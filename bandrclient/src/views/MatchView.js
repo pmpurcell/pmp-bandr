@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import ModalDetails from '../components/MatchModal';
+
 
 export default function MatchView() {
+
   return (
-    <div>MatchView</div>
+    <ModalDetails />
   )
 }
