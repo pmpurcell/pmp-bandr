@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -6,10 +6,15 @@ import {
   AiFillQuestionCircle,
   AiFillLike,
 } from "react-icons/ai";
+import { Modal, Button } from 'reactstrap';
 import { createMatch, checkRelationship } from "../data/matchData";
 import { getSingleUserByFID } from "../data/userData";
 
 export default function UserCard({ user, match }) {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
   const viewUserProfile = (id) => {
@@ -25,7 +30,7 @@ export default function UserCard({ user, match }) {
         console.warn(response);
         if (response.recMatch && response.swiperMatch) {
           console.warn("It's a match!");
-          navigate("/match", user, match);
+          handleShow();
         } else {
           console.warn(response);
           console.warn("Nope!");
@@ -62,7 +67,18 @@ export default function UserCard({ user, match }) {
         <h3>{match.userName}</h3>
         <h3>{match.userAge}</h3>
       </div>
-      <div></div>
+      <div>
+      <Modal animation={false} isOpen={show}>
+        <div className="modal-details">
+          <div className="col-auto">
+          </div>
+          <h1 className="card-title">It's a match!!!</h1>
+          <p className="card-text">{user.name}</p>
+          <p className="card-text">{match.userName}</p>
+          <Button onClick={handleClose}> Keep Swiping </Button>
+        </div>
+      </Modal>
+      </div>
       <div className="button-div">
         <AiFillDislike onClick={() => swipeLeft()} />
         <AiFillQuestionCircle
