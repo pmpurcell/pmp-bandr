@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import EditUserForm from '../components/EditUserForm'
-import { getSingleUser } from '../data/userData';
-import { getPlayedInstruments } from '../data/instrumentData';
-import { getPlayedGenres } from '../data/genreData';
+import EditUserForm from "../components/EditUserForm";
+import { getSingleUser } from "../data/userData";
+import { getPlayedInstruments } from "../data/instrumentData";
+import { getPlayedGenres } from "../data/genreData";
 
 export default function EditView() {
   const [profile, setProfile] = useState({});
-  const [instruments, setInstruments] = useState([]);
-  const [genres, setGenres] = useState([]);
+  const [playedInstruments, setplayedInstruments] = useState([]);
+  const [playedGenres, setplayedGenres] = useState([]);
 
   const { id } = useParams();
 
@@ -17,20 +17,26 @@ export default function EditView() {
     if (isMounted) {
       getSingleUser(id).then((profile) => setProfile(profile));
       getPlayedInstruments(id).then((instrumentArr) =>
-        setInstruments(instrumentArr)
+        setplayedInstruments(instrumentArr)
       );
-      getPlayedGenres(id).then((genreArr) => setGenres(genreArr));
+      console.warn(playedInstruments);
+      getPlayedGenres(id).then((genreArr) => setplayedGenres(genreArr));
     }
     return () => {
       isMounted = false;
     };
   }, [id]);
 
-
   return (
     <div>
-        <h3>EditView</h3>
-        <EditUserForm user={profile} />
+      <h3>EditView</h3>
+      <EditUserForm user={profile} />
+      {playedInstruments.map((playedInstrument) => {
+        <p>{playedInstrument.instrument.instrumentName}</p>;
+      })}
+      {playedGenres.map((playedGenre) => {
+        <p>{playedGenre.genre.genreName}</p>;
+      })}
     </div>
-  )
+  );
 }
