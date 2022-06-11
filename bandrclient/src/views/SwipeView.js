@@ -54,7 +54,7 @@ export default function SwipeView({ user }) {
       <Button onClick={signInUser}>Sign In</Button>
       <Button onClick={signOutUser}>Sign Out</Button>
       <Button onClick={findMatch}>Find A Match</Button>
-      <Button onClick={editProfile}>Edit Profile</Button>
+      <Button onClick={() => {editProfile(user.firebaseId)}}>Edit Profile</Button>
       <Button
         onClick={() => {
           myProfile(user.firebaseId);

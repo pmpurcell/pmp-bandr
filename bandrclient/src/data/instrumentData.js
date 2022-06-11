@@ -14,4 +14,19 @@ const getPlayedInstruments = (id) => new Promise((resolve, reject) => {
         .catch(reject);
 })
 
-export { getAllInstruments, getPlayedInstruments };
+const addPlayedInstruments = (userId, instrumentId, instrumentName) => new Promise((resolve, reject) => {
+    const playedObj = {
+        userId: userId,
+        instrumentId: instrumentId,
+        instrument: {
+          id: instrumentId,
+          instrumentName: instrumentName
+        }
+    }
+    axios
+        .post(`${baseURL}/PlayedInstrument`, playedObj).then((response) => {console.warn(`POST!!!! ${response.data} POST!!!!`);
+            resolve(response.data)})
+        .catch(reject);
+})
+
+export { getAllInstruments, getPlayedInstruments, addPlayedInstruments };
