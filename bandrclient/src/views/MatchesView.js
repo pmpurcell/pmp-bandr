@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getUserMatches } from '../data/matchData';
 
 export default function MatchesView() {
   const [matches, setMatches] = useState([]);
-
-  const navigate = useNavigate();
 
   const { id } = useParams();
 

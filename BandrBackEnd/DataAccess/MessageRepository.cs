@@ -125,7 +125,7 @@ namespace BandrBackEnd.DataAccess
                     cmd.CommandText = @"
                                         INSERT INTO [Message]
                                        (ParticipantId,
-                                       MatchId
+                                       MatchId,
                                        Body,
                                        TimeSent)
                                         

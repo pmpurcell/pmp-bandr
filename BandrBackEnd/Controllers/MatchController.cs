@@ -113,6 +113,7 @@ namespace BandrBackEnd.Controllers
 
             Match updateMatch = new Match()
             {
+                Id = match.Id,
                 swiperId = swiperId,
                 swiperMatch = match.swiperMatch,
                 recId = recId,
