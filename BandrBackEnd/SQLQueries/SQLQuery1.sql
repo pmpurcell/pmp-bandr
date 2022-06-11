@@ -107,7 +107,7 @@ SkillLevel)
 OUTPUT Inserted.Id
 VALUES ('asdfasdfrgaga', '', 'Sam', 28, '', 'Nashville', 'Advanced')
 
-SELECT * FROM [Match] WHERE SwiperId = 1 OR RecId = 1 AND RecMatch = 1 AND SwiperMatch = 1;
+SELECT * FROM [Match] WHERE (SwiperId = 1 OR RecId = 1) AND (RecMatch = 1 AND SwiperMatch = 1);
 
 ALTER TABLE Message
 ADD MatchId int;
