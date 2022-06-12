@@ -2,15 +2,13 @@ import React, {useState, useEffect} from 'react'
 import { useParams, Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { createMessage, getMessagesByMatch } from '../data/messagesData';
-import { getSingleUserByFID } from '../data/userData';
 
 const initialState = {
   body: "",
 };
 
 export default function DirectMessageView({ user }) {
-  const [messages, setMessages] = useState([]);
-  const [messageUser, setmessageUser] = useState({});
+  const [messages, setMessages] = useState([])
   const [formInput, setFormInput] = useState(initialState);
 
   const { convoId } = useParams();
@@ -50,7 +48,6 @@ export default function DirectMessageView({ user }) {
         photo: user.photo,
         skillLevel: user.skillLevel
       }
-      // timeSent: Date.now
     }
     console.warn(messageObj);
 
@@ -59,14 +56,15 @@ export default function DirectMessageView({ user }) {
 
   return (
     <div>
+      <div id="conversationDiv">
         <h3>DirectMessageView</h3>
-        <h4>{convoId}</h4>
         {messages.map((message) => (
-          <div>
+          <div className= {(message.participant.id = user.id) ? "user-message" : "match-message"}>
           <h6>{message.participant.userName}</h6>
           <p>{message.body}</p>
           </div>
         ))}
+      </div>
         <form onSubmit={handleSubmit}>
         <label htmlFor="body" className="form-label">
             <input

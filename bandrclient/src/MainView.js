@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.scss";
 import { useState, useEffect } from "react";
 import auth from "./data/firebaseAuth";
 import { checkUserCreatedInDB, getSingleUserByFID } from "./data/userData";
