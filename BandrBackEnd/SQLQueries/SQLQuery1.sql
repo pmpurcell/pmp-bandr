@@ -111,3 +111,9 @@ SELECT * FROM [Match] WHERE (SwiperId = 1 OR RecId = 1) AND (RecMatch = 1 AND Sw
 
 ALTER TABLE Message
 ADD MatchId int;
+
+SELECT * FROM Message;
+
+DELETE FROM Message
+
+DELETE FROM Message WHERE ParticipantId = 0;

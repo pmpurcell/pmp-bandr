@@ -18,7 +18,7 @@ export default function Routing({ user }) {
         <Route path="/user/:id" element={<UserView />} />
         <Route path="/user/edit/:id" element={<EditView />} />
         <Route path="/matches/:id" element={<MatchesView />} />
-        <Route path="/messages/:convoId" element={<DirectMessageView />} />
+        <Route path="/messages/:convoId" element={<DirectMessageView user={user} />} />
         <Route path="/settings" element={<SettingsView />} />
       </Routes>
     </>

@@ -47,15 +47,24 @@ namespace BandrBackEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult createMessage(Message newMessage)
+        public ActionResult createMessage(Message messageObj)
         {
-            if(newMessage == null)
+            if(messageObj == null)
             {
                 return NotFound();
             }
             else
             {
+                Message newMessage = new Message()
+                {
+                    body = messageObj.body,
+                    participantId = messageObj.participantId,
+                    matchId = messageObj.matchId,
+                    timeSent = DateTime.Now
+                };
+
                 _messageRepository.createMessage(newMessage);
+
                 return Ok();
             }
         }
