@@ -17,10 +17,10 @@ namespace BandrBackEnd.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet]
-        public ActionResult getAllUsers()
+        [HttpGet("matches/{userId}")]
+        public ActionResult getAllUsers(int userId)
         {
-            List<User> users = _userRepository.getAllUsers();
+            List<User> users = _userRepository.getAllUsers(userId);
 
             if (users == null)
             {

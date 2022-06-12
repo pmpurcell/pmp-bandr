@@ -12,6 +12,7 @@ import UserCard from "../components/UserCard";
 import { useNavigate } from "react-router-dom";
 
 export default function SwipeView({ user }) {
+  const [loggedInUser, setLoggedInUser] = useState({});
   const [userList, setUserList] = useState([]);
   const [match, setMatch] = useState({});
 
@@ -19,8 +20,7 @@ export default function SwipeView({ user }) {
 
   useEffect(() => {
     let isMounted = true;
-
-    getAllUsers().then((response) => {
+    getAllUsers(user.id).then((response) => {
       if (isMounted) {
         setUserList(response);
       }
@@ -28,30 +28,24 @@ export default function SwipeView({ user }) {
     return () => {
       isMounted = false;
     };
-  }, [userList]);
+  }, [userList, loggedInUser.id, user.firebaseUid]);
 
   const findMatch = () => {
-    let random = Math.floor(Math.random() * userList.length + 1);
+    let random = Math.floor(Math.random() * userList.length);
     console.warn(random);
-    getSingleUser(random).then((response) => setMatch(response));
+    setMatch(userList[random]);
   };
 
-  const myProfile = (firebaseUid) => {
-    getSingleUserByFID(firebaseUid).then((response) =>
-      navigate(`/user/${response.id}`)
-    );
+  const myProfile = (id) => {
+      navigate(`/user/${id}`)
   };
 
-  const editProfile = (firebaseUid) => {
-    getSingleUserByFID(firebaseUid).then((response) =>
-      navigate(`/user/edit/${response.id}`)
-    );
+  const editProfile = (id) => {
+      navigate(`/user/edit/${id}`)
   };
 
-  const viewMatches = (firebaseUid) => {
-    getSingleUserByFID(firebaseUid).then((response) =>
-      navigate(`/matches/${response.id}`)
-    );
+  const viewMatches = (id) => {
+      navigate(`/matches/${id}`)
   };
 
 
@@ -62,11 +56,11 @@ export default function SwipeView({ user }) {
       <Button onClick={signInUser}>Sign In</Button>
       <Button onClick={signOutUser}>Sign Out</Button>
       <Button onClick={findMatch}>Find A Match</Button>
-      <Button onClick={() => {viewMatches(user.firebaseId)}}>Messages</Button>
-      <Button onClick={() => {editProfile(user.firebaseId)}}>Edit Profile</Button>
+      <Button onClick={() => {viewMatches(user.id)}}>Messages</Button>
+      <Button onClick={() => {editProfile(user.id)}}>Edit Profile</Button>
       <Button
         onClick={() => {
-          myProfile(user.firebaseId);
+          myProfile(user.id);
         }}
       >
         My Profile

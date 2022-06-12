@@ -13,10 +13,10 @@ const checkUserCreatedInDB = async () => {
   });
 };
 
-const getAllUsers = () =>
+const getAllUsers = (userId) =>
   new Promise((resolve, reject) => {
     axios
-      .get(`${baseURL}/user`)
+      .get(`${baseURL}/user/matches/${userId}`)
       .then((response) => resolve(response.data))
       .catch(reject);
   });

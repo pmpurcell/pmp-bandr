@@ -7,7 +7,7 @@ namespace BandrBackEnd.DataAccess
 {
     public interface IUserRepository
     {
-        public List<User> getAllUsers();
+        public List<User> getAllUsers(int userId);
         public User getSingleUser(int firebaseUid);
 
         public User getUserByFirebaseId(string uid);
