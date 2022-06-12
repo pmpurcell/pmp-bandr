@@ -63,51 +63,63 @@ export default function EditView() {
     <div>
       <h3>EditView</h3>
       <EditUserForm user={profile} />
-      {playedInstruments.map((playedInstrument) => (
-        <div>
-          <p>{playedInstrument.instrument.instrumentName}</p>
-          <Button onClick={() => removeInstruments(playedInstrument.id)}>
-            Remove
-          </Button>
+      <div className="edit-item-div">
+        <div className="item-div">
+          {playedInstruments.map((playedInstrument) => (
+            <div>
+              <p>{playedInstrument.instrument.instrumentName}</p>
+              <Button onClick={() => removeInstruments(playedInstrument.id)}>
+                Remove
+              </Button>
+            </div>
+          ))}
         </div>
-      ))}
-      {allInstruments.map((instrument) => (
-        <div>
-          <p>{instrument.instrumentName}</p>
-          <Button
-            onClick={() =>
-              addInstruments(
-                profile.id,
-                instrument.id,
-                instrument.instrumentName
-              )
-            }
-          >
-            {" "}
-            Add Instrument
-          </Button>
+        <div className="item-div">
+          {allInstruments.map((instrument) => (
+            <div>
+              <p>{instrument.instrumentName}</p>
+              <Button
+                onClick={() =>
+                  addInstruments(
+                    profile.id,
+                    instrument.id,
+                    instrument.instrumentName
+                  )
+                }
+              >
+                {" "}
+                Add Instrument
+              </Button>
+            </div>
+          ))}
         </div>
-      ))}
-      {playedGenres.map((playedGenre) => (
-        <div>
-          <p>{playedGenre.genre.genreName}</p>
-          <Button onClick={() => removeGenres(playedGenre.id)}>
-            Remove Genre
-          </Button>
+      </div>
+      <div className="edit-item-div">
+        <div className="item-div">
+          {playedGenres.map((playedGenre) => (
+            <div key={playedGenre.id}>
+              <p>{playedGenre.genre.genreName}</p>
+              <Button onClick={() => removeGenres(playedGenre.id)}>
+                Remove Genre
+              </Button>
+            </div>
+          ))}
         </div>
-      ))}
-      {allGenres.map((genre) => (
-        <div>
-          <p>{genre.genreName}</p>
-          <Button
-            onClick={() => {
-              addGenres(profile.id, genre.id, genre.genreName);
-            }}
-          >
-            Add Genre
-          </Button>
+        <div className="item-div">
+          {allGenres.map((genre) => (
+            <div>
+              <p>{genre.genreName}</p>
+              <Button
+                onClick={() => {
+                  addGenres(profile.id, genre.id, genre.genreName);
+                }}
+              >
+                Add Genre
+              </Button>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
       <Link to="/swipe">Go Back</Link>
     </div>
   );

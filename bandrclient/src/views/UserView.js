@@ -29,27 +29,35 @@ export default function UserView() {
   return (
     <div>
       <h3>UserView</h3>
-      <img
-        src={
-          profile.photo ||
-          "https://i.pinimg.com/originals/e4/03/de/e403de788507db2505774f48f70a8eab.png"
-        }
-        alt={profile.userName}
-        width="250px"
-        height="300px"
-      />
-      <p>{profile.userName}</p>
-      <p>{profile.userAge}</p>
-      <p>{profile.location}</p>
-      <p>{profile.userBio}</p>
-      <p>Instruments</p>
-      {instruments.map((instrument) => (
-        <p>{instrument.instrument.instrumentName}</p>
-      ))}
-      <p>Genres</p>
-      {genres.map((genre) => (
-        <p>{genre.genre.genreName}</p>
-      ))}
+      <div className="user-info">
+        <img
+          src={
+            profile.photo ||
+            "https://i.pinimg.com/originals/e4/03/de/e403de788507db2505774f48f70a8eab.png"
+          }
+          alt={profile.userName}
+          width="250px"
+          height="300px"
+        />
+        <p>{profile.userName}</p>
+        <p>{profile.userAge}</p>
+        <p>{profile.location}</p>
+        <p>{profile.userBio}</p>
+      </div>
+      <div className="instrument-genres-div">
+        <div className="instrument-div">
+          <p>Instruments</p>
+          {instruments.map((instrument) => (
+            <p>{instrument.instrument.instrumentName}</p>
+          ))}
+        </div>
+        <div className="genre-div">
+          <p>Genres</p>
+          {genres.map((genre) => (
+            <p>{genre.genre.genreName}</p>
+          ))}
+        </div>
+      </div>
       <Link to="/swipe">Go Back</Link>
     </div>
   );
