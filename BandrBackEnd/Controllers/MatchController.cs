@@ -30,6 +30,20 @@ namespace BandrBackEnd.Controllers
             }
         }
 
+        [HttpGet("{userId}")]
+        public ActionResult getUserMatch(int userId)
+        {
+            List<Match> matches = _matchRepository.getUserMatches(userId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(matches);
+            }
+        }
+
         [HttpPost]
         public ActionResult createMatch(Match newMatch)
         {
@@ -99,6 +113,7 @@ namespace BandrBackEnd.Controllers
 
             Match updateMatch = new Match()
             {
+                Id = match.Id,
                 swiperId = swiperId,
                 swiperMatch = match.swiperMatch,
                 recId = recId,

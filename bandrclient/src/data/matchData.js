@@ -17,4 +17,10 @@ const createMatch = (matchObj) => new Promise((resolve, reject) => {
         .catch(reject);
 });
 
-export {createMatch, checkRelationship};
+const getUserMatches = (userId) => new Promise((resolve, reject) => {
+    axios
+        .get(`${baseURL}/api/match/${userId}`).then((response) => resolve(response.data))
+        .catch(reject);
+})
+
+export {createMatch, checkRelationship, getUserMatches};

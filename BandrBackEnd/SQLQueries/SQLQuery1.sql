@@ -1,6 +1,6 @@
 ﻿INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 0, 7, 1);
 INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (1, 1, 2, 1);
-INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (7, 0, 1, 0);
+INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (7, 1, 1, 1);
 INSERT INTO [Match] (SwiperId, SwiperMatch, RecId, RecMatch) VALUES (8, 1, 1, 0);
 
 SELECT * FROM [Match]
@@ -107,4 +107,13 @@ SkillLevel)
 OUTPUT Inserted.Id
 VALUES ('asdfasdfrgaga', '', 'Sam', 28, '', 'Nashville', 'Advanced')
 
-SELECT * FROM [Match] WHERE SwiperId = 1 AND RecId = 8;
+SELECT * FROM [Match] WHERE (SwiperId = 1 OR RecId = 1) AND (RecMatch = 1 AND SwiperMatch = 1);
+
+ALTER TABLE Message
+ADD MatchId int;
+
+SELECT * FROM Message;
+
+DELETE FROM Message
+
+DELETE FROM Message WHERE ParticipantId = 0;

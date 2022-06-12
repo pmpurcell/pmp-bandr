@@ -16,11 +16,11 @@ namespace BandrBackEnd.Controllers
             _messageRepository = messageRepository;
         }
 
-        [HttpGet("participant/{participantId}")]
+        [HttpGet("match/{matchId}")]
 
-        public ActionResult getMessagesByPartId(int participantId)
+        public ActionResult getMessagesByMatchId(int matchId)
         {
-            List <Message> messages = _messageRepository.GetMessagesByPartId (participantId);
+            List <Message> messages = _messageRepository.GetMessagesByMatchId (matchId);
 
             if(messages == null)
             {
@@ -47,15 +47,24 @@ namespace BandrBackEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult createMessage(Message newMessage)
+        public ActionResult createMessage(Message messageObj)
         {
-            if(newMessage == null)
+            if(messageObj == null)
             {
                 return NotFound();
             }
             else
             {
+                Message newMessage = new Message()
+                {
+                    body = messageObj.body,
+                    participantId = messageObj.participantId,
+                    matchId = messageObj.matchId,
+                    timeSent = DateTime.Now
+                };
+
                 _messageRepository.createMessage(newMessage);
+
                 return Ok();
             }
         }

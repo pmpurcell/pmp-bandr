@@ -12,6 +12,7 @@ import { getSingleUserByFID } from "../data/userData";
 
 export default function UserCard({ user, match }) {
   const [show, setShow] = useState(false);
+  const [matchRel, setMatchRel] = useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,6 +31,7 @@ export default function UserCard({ user, match }) {
         console.warn(response);
         if (response.recMatch && response.swiperMatch) {
           console.warn("It's a match!");
+          setMatchRel(response)
           handleShow();
         } else {
           console.warn(response);
@@ -50,6 +52,10 @@ export default function UserCard({ user, match }) {
       console.warn(matchObj);
       createMatch(matchObj);
     });
+  };
+
+  const toMessages = (matchId) => {
+    navigate(`/messages/${matchId}`);
   };
 
   return (
@@ -76,6 +82,7 @@ export default function UserCard({ user, match }) {
           <p className="card-text">{user.name}</p>
           <p className="card-text">{match.userName}</p>
           <Button onClick={handleClose}> Keep Swiping </Button>
+          <Button onClick={() => toMessages(matchRel.id)}> Start Talking! </Button>
         </div>
       </Modal>
       </div>
