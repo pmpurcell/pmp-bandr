@@ -43,6 +43,14 @@ export default function DirectMessageView({ user }) {
       participantId: user.id,
       matchId: convoId,
       body: formInput.body,
+      participant: {
+        id: user.id,
+        firebaseUid: user.firebaseUid,
+        userName: user.userName,
+        photo: user.photo,
+        skillLevel: user.skillLevel
+      }
+      // timeSent: Date.now
     }
     console.warn(messageObj);
 

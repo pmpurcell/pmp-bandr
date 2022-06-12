@@ -11,9 +11,16 @@ namespace BandrBackEnd.Controllers
     {
         private readonly IMessageRepository _messageRepository;
 
+        private readonly IUserRepository _userRepository;
+
         public MessageController(IMessageRepository messageRepository)
         {
             _messageRepository = messageRepository;
+        }
+
+        public MessageController (IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
         }
 
         [HttpGet("match/{matchId}")]
@@ -55,12 +62,17 @@ namespace BandrBackEnd.Controllers
             }
             else
             {
+                User participant = _userRepository.getSingleUser(messageObj.participantId);
                 Message newMessage = new Message()
                 {
                     body = messageObj.body,
                     participantId = messageObj.participantId,
                     matchId = messageObj.matchId,
-                    timeSent = DateTime.Now
+                    timeSent = DateTime.Now,
+                    participant = {
+                    Id = messageObj.participantId
+                    userName = participant.userName,
+                    }
                 };
 
                 
