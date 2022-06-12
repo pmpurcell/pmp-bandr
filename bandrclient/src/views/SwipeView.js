@@ -51,7 +51,7 @@ export default function SwipeView({ user }) {
 
   return (
     <div>
-      <p>Welcome to Bandr, {user.name}!</p>
+      <p>Welcome to Bandr, {user.userName}!</p>
       <UserCard user={user} match={match} />
       <Button onClick={signInUser}>Sign In</Button>
       <Button onClick={signOutUser}>Sign Out</Button>

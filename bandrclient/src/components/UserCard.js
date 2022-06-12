@@ -8,7 +8,6 @@ import {
 } from "react-icons/ai";
 import { Modal, Button } from 'reactstrap';
 import { createMatch, checkRelationship } from "../data/matchData";
-import { getSingleUserByFID } from "../data/userData";
 
 export default function UserCard({ user, match }) {
   const [show, setShow] = useState(false);
@@ -23,11 +22,9 @@ export default function UserCard({ user, match }) {
   };
 
   const swipeRight = () => {
-    getSingleUserByFID(user.firebaseId).then((response) => {
-      console.warn(response);
-      console.warn(`User: ${response.id}
+      console.warn(`User: ${user.id}
                     Recipient: ${match.id}`);
-      checkRelationship(response.id, match.id, true).then((response) => {
+      checkRelationship(user.id, match.id, true).then((response) => {
         console.warn(response);
         if (response.recMatch && response.swiperMatch) {
           console.warn("It's a match!");
@@ -38,20 +35,17 @@ export default function UserCard({ user, match }) {
           console.warn("Nope!");
         }
       });
-    });
   };
 
   const swipeLeft = () => {
-    getSingleUserByFID(user.firebaseId).then((response) => {
       const matchObj = {
-        swiperId: response.id,
+        swiperId: user.id,
         swiperMatch: false,
         recId: match.id,
         recMatch: false,
       };
       console.warn(matchObj);
       createMatch(matchObj);
-    });
   };
 
   const toMessages = (matchId) => {
@@ -79,7 +73,7 @@ export default function UserCard({ user, match }) {
           <div className="col-auto">
           </div>
           <h1 className="card-title">It's a match!!!</h1>
-          <p className="card-text">{user.name}</p>
+          <p className="card-text">{user.userName}</p>
           <p className="card-text">{match.userName}</p>
           <Button onClick={handleClose}> Keep Swiping </Button>
           <Button onClick={() => toMessages(matchRel.id)}> Start Talking! </Button>
