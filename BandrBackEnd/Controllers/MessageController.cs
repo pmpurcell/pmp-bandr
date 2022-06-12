@@ -63,6 +63,7 @@ namespace BandrBackEnd.Controllers
                     timeSent = DateTime.Now
                 };
 
+                
                 _messageRepository.createMessage(newMessage);
 
                 return Ok();

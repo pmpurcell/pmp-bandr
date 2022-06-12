@@ -117,3 +117,16 @@ SELECT * FROM Message;
 DELETE FROM Message
 
 DELETE FROM Message WHERE ParticipantId = 0;
+
+                                       SELECT
+                                       m.Id,
+                                       m.MatchId,
+                                       m.ParticipantId,
+                                       m.Body,
+                                       m.TimeSent,
+                                       p.userName
+                                       
+                                       FROM
+                                       [Message] as m
+                                        LEFT JOIN [User] as p on p.Id = m.ParticipantId
+                                         WHERE m.MatchId = 39
