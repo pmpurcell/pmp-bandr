@@ -21,15 +21,12 @@ export default function DirectMessageView({ user }) {
     getMessagesByMatch(convoId).then((response) => {
       if (isMounted) {
         setMessages(response);
-        getSingleUserByFID(user.firebaseId).then((response) => {
-          setmessageUser(response);
-        })
       }
     })
     return () => {
       isMounted = false;
     };
-  }, [convoId, user.id, messages]);
+  }, [convoId, messages]);
 
   
   const handleChange = (e) => {
@@ -43,18 +40,19 @@ export default function DirectMessageView({ user }) {
 
     e.preventDefault();
     const messageObj = {
-      participantId: messageUser.id,
+      participantId: user.id,
       matchId: convoId,
       body: formInput.body,
       participant: {
-        id: messageUser.id,
-        firebaseUid: messageUser.firebaseUid,
-        userName: messageUser.userName,
-        photo: messageUser.photo,
-        skillLevel: messageUser.skillLevel
+        id: user.id,
+        firebaseUid: user.firebaseUid,
+        userName: user.userName,
+        photo: user.photo,
+        skillLevel: user.skillLevel
       }
       // timeSent: Date.now
     }
+    console.warn(messageObj);
 
     createMessage(messageObj).then(getMessagesByMatch(convoId).then(setMessages));
   };
@@ -80,7 +78,7 @@ export default function DirectMessageView({ user }) {
             />
           </label>
         </form>
-        <Link to={`/matches/${messageUser.id}`}>Go Back</Link>
+        <Link to={`/matches/${user.id}`}>Go Back</Link>
     </div>
   )
 }

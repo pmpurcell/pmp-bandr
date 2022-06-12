@@ -23,7 +23,7 @@ namespace BandrBackEnd.DataAccess
             }
         }
 
-        public List<User> getAllUsers()
+        public List<User> getAllUsers(int userId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -43,7 +43,10 @@ namespace BandrBackEnd.DataAccess
                                         skillLevel
                                         FROM
                                         [User]
+                                        WHERE Id != @userId
                                         ";
+
+                    cmd.Parameters.AddWithValue("@userId", userId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
