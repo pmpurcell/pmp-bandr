@@ -33,14 +33,17 @@ namespace BandrBackEnd.DataAccess
                 {
                     cmd.CommandText = @"
                                        SELECT
-                                       Id,
-                                       MatchId,
-                                       ParticipantId,
-                                       Body,
-                                       TimeSent
+                                       m.Id,
+                                       m.MatchId,
+                                       m.ParticipantId,
+                                       m.Body,
+                                       m.TimeSent,
+                                       p.userName
                                        
                                        FROM
-                                       [Message] WHERE MatchId = @matchId
+                                       [Message] as m
+                                       LEFT JOIN [User] as p on p.Id = m.ParticipantId
+                                       WHERE m.MatchId = @matchId
                                        ";
 
                     cmd.Parameters.AddWithValue("MatchId", matchId);
@@ -55,6 +58,11 @@ namespace BandrBackEnd.DataAccess
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             matchId = reader.GetInt32(reader.GetOrdinal("MatchId")),
                             participantId = reader.GetInt32(reader.GetOrdinal("ParticipantId")),
+                            participant = new User()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                userName = reader.GetString(reader.GetOrdinal("userName"))
+                            },
                             body = reader.GetString(reader.GetOrdinal("Body")),
                             timeSent = reader.GetDateTime(reader.GetOrdinal("TimeSent")),
                         };

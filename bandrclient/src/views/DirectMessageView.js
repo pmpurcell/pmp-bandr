@@ -58,7 +58,7 @@ export default function DirectMessageView({ user }) {
         <h4>{convoId}</h4>
         {messages.map((message) => (
           <div>
-          <h6>{message.participantId}</h6>
+          <h6>{message.participant.userName}</h6>
           <p>{message.body}</p>
           </div>
         ))}
@@ -73,7 +73,7 @@ export default function DirectMessageView({ user }) {
             />
           </label>
         </form>
-        <Link to={`/matches/${user.id}`}>Go Back</Link>
+        <Link to={`/matches/${messageUser.id}`}>Go Back</Link>
     </div>
   )
 }
