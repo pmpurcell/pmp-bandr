@@ -46,7 +46,14 @@ export default function DirectMessageView({ user }) {
       participantId: messageUser.id,
       matchId: convoId,
       body: formInput.body,
-      timeSent: Date.now
+      participant: {
+        id: messageUser.id,
+        firebaseUid: messageUser.firebaseUid,
+        userName: messageUser.userName,
+        photo: messageUser.photo,
+        skillLevel: messageUser.skillLevel
+      }
+      // timeSent: Date.now
     }
 
     createMessage(messageObj).then(getMessagesByMatch(convoId).then(setMessages));
