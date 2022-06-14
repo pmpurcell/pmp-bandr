@@ -13,13 +13,9 @@ namespace BandrBackEnd.Controllers
 
         private readonly IUserRepository _userRepository;
 
-        public MessageController(IMessageRepository messageRepository)
+        public MessageController(IMessageRepository messageRepository, IUserRepository userRepository)
         {
             _messageRepository = messageRepository;
-        }
-
-        public MessageController (IUserRepository userRepository)
-        {
             _userRepository = userRepository;
         }
 
@@ -70,7 +66,7 @@ namespace BandrBackEnd.Controllers
                     matchId = messageObj.matchId,
                     timeSent = DateTime.Now,
                     participant = {
-                    Id = messageObj.participantId
+                    Id = messageObj.participantId,
                     userName = participant.userName,
                     }
                 };

@@ -45,6 +45,7 @@ export default function DirectMessageView({ user }) {
         id: user.id,
         firebaseUid: user.firebaseUid,
         userName: user.userName,
+        userAge: user.userAge,
         photo: user.photo,
         skillLevel: user.skillLevel
       }
