@@ -65,10 +65,7 @@ namespace BandrBackEnd.Controllers
                     participantId = messageObj.participantId,
                     matchId = messageObj.matchId,
                     timeSent = DateTime.Now,
-                    participant = {
-                    Id = messageObj.participantId,
-                    userName = participant.userName,
-                    }
+                    participant = participant
                 };
 
                 
