@@ -7,6 +7,9 @@ SELECT * FROM [Match]
 
 DELETE FROM [Match]
 
+
+SELECT * FROM Message WHERE MatchId = 39;
+
 SELECT * FROM [User] WHERE Id != 1
 
 CREATE TABLE [Message](
