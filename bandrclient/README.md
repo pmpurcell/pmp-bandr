@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Bandr
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Find the perfect musical match for you, and make professional connections in this simple and easy to use app!!
 
-## Available Scripts
+# Getting Started
 
-In the project directory, you can run:
+```
+git clone [git@github.com:pmpurcell/bandrclient.git](https://github.com/pmpurcell/pmp-bandr.git)
+cd bandrclient
+code .
+npm start
+```
 
-### `npm start`
+# About the User
+The user is a musician that would like to meet other musicians with similar interests in instruments and genres.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Features
+Custom user experience with full profile and option to choose favorite instruments and genres.
+Simple, Tinder-style match system for other musicians.
+Conversation with matched musicians via a Messages view.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+# Relevant Links
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Project Board]([https://github.com/pmpurcell/pmp-uke-trainer/projects/2](https://github.com/pmpurcell/pmp-bandr/projects/1))
 
-### `npm run build`
+[Wireframe]([https://www.figma.com/file/l4pWynSUT4WSYE7NQwNe2S/UkeTrainer?node-id=2%3A8](https://www.figma.com/file/pMap4ZepQDRltiw5K8gAU5/Madden%E2%80%99s-board?node-id=0%3A1))
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[dbDiagram]([https://dbdiagram.io/d/61a594278c901501c0d87604](https://dbdiagram.io/d/6282f09f7f945876b62dc2ac))
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Contributors
+[Madden Purcell](https://github.com/pmpurcell)
