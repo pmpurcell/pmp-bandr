@@ -22,11 +22,11 @@ Conversation with matched musicians via a Messages view.
 
 # Relevant Links
 
-[Project Board]([https://github.com/pmpurcell/pmp-uke-trainer/projects/2](https://github.com/pmpurcell/pmp-bandr/projects/1))
+[Project Board](https://github.com/pmpurcell/pmp-bandr/projects/1)
 
-[Wireframe]([https://www.figma.com/file/l4pWynSUT4WSYE7NQwNe2S/UkeTrainer?node-id=2%3A8](https://www.figma.com/file/pMap4ZepQDRltiw5K8gAU5/Madden%E2%80%99s-board?node-id=0%3A1))
+[Wireframe](https://www.figma.com/file/pMap4ZepQDRltiw5K8gAU5/Madden%E2%80%99s-board?node-id=0%3A1)
 
-[dbDiagram]([https://dbdiagram.io/d/61a594278c901501c0d87604](https://dbdiagram.io/d/6282f09f7f945876b62dc2ac))
+[dbDiagram](https://dbdiagram.io/d/6282f09f7f945876b62dc2ac)
 
 # Contributors
 [Madden Purcell](https://github.com/pmpurcell)
