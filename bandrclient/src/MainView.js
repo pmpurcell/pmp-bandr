@@ -4,6 +4,7 @@ import auth from "./data/firebaseAuth";
 import { checkUserCreatedInDB, getSingleUserByFID } from "./data/userData";
 import Routing from "./routes";
 import { useNavigate } from "react-router-dom";
+import FooterNavbar from "./components/FooterNavbar";
 
 function MainView() {
   const [user, setUser] = useState(null);
@@ -39,6 +40,7 @@ function MainView() {
       <header className="App-header">
         <Routing user={user}></Routing>
       </header>
+      <FooterNavbar />
     </div>
   );
 }
